@@ -142,7 +142,7 @@ keyword, not just that *some* error came back.
 
 ```sh
 clojure -M:test                                                        # JVM
-nbb --classpath "$(clojure -A:cljs -Spath)" scripts/verify-cljs.cljs   # ClojureScript
+nbb --classpath "$(clojure -A:cljs -Spath)" scripts/verify-cljs.cljk   # ClojureScript
 ```
 
 21 tests, 66,342 assertions, on both runtimes. Exhaustive sweeps: all
@@ -157,7 +157,7 @@ This library's own suite was used to demonstrate, not just assert, the
 ClojureScript-negative-word bug this README warns about: temporarily
 replacing `arinc429.bits/u32` with the identity function reproduces
 exactly the failure the code exists to prevent — under
-`nbb scripts/verify-cljs.cljs`, `word-round-trips-exhaustively` fails
+`nbb scripts/verify-cljs.cljk`, `word-round-trips-exhaustively` fails
 with `expected: (>= word 0), actual: (not (>= -2147483648 0))` (and
 many more negative words like it) while the identical suite stays
 green under `clojure -M:test`, because the JVM's `bit-or` operates on
