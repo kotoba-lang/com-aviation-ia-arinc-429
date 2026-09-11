@@ -141,8 +141,8 @@ keyword, not just that *some* error came back.
 ## Verify
 
 ```sh
-clojure -M:test                                                        # JVM
-nbb --classpath "$(clojure -A:cljs -Spath)" scripts/verify-cljs.cljk   # ClojureScript
+kbb -M:test                                                        # JVM
+kbb --backend sci --classpath "$(kbb -A:cljs -Spath)" scripts/verify-cljs.cljk   # ClojureScript
 ```
 
 21 tests, 66,342 assertions, on both runtimes. Exhaustive sweeps: all
@@ -157,10 +157,10 @@ This library's own suite was used to demonstrate, not just assert, the
 ClojureScript-negative-word bug this README warns about: temporarily
 replacing `arinc429.bits/u32` with the identity function reproduces
 exactly the failure the code exists to prevent — under
-`nbb scripts/verify-cljs.cljk`, `word-round-trips-exhaustively` fails
+`kbb --backend sci scripts/verify-cljs.cljk`, `word-round-trips-exhaustively` fails
 with `expected: (>= word 0), actual: (not (>= -2147483648 0))` (and
 many more negative words like it) while the identical suite stays
-green under `clojure -M:test`, because the JVM's `bit-or` operates on
+green under `kbb -M:test`, because the JVM's `bit-or` operates on
 64-bit longs and never needed the fix. The same technique was used
 against `arinc429.word/parity-ok?` (inverting `odd?` to `even?`):
 `word-parity-mismatch-is-detected` then fails with
